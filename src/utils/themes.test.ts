@@ -9,7 +9,7 @@ describe('getDefaultTheme', () => {
 
 	it('sets primary colour based on default blue #0274D7', () => {
 		const theme = getDefaultTheme();
-		// CustomTheme applies hexToRGB so primary.main will be an rgba string
+		// CustomTheme applies hexToRGB so primary.main will be a rgba string
 		expect(theme.palette.primary.main).toContain('rgba');
 	});
 

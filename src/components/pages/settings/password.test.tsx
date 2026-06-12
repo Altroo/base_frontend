@@ -53,7 +53,7 @@ jest.mock('@/store/services/account', () => ({
 	useEditPasswordMutation: () => [mockChangePassword, { isLoading: false }],
 }));
 
-// Mock form sub-components
+// Mock form subcomponents
 jest.mock('@/components/formikElements/customPasswordInput/customPasswordInput', () => ({
 	__esModule: true,
 	default: ({ id, label, value }: { id: string; label: string; value: string }) => (
@@ -66,9 +66,7 @@ jest.mock('@/components/formikElements/customPasswordInput/customPasswordInput',
 
 jest.mock('@/components/htmlElements/buttons/primaryLoadingButton/primaryLoadingButton', () => ({
 	__esModule: true,
-	default: ({ buttonText }: { buttonText: string }) => (
-		<button data-testid="submit-button">{buttonText}</button>
-	),
+	default: ({ buttonText }: { buttonText: string }) => <button data-testid="submit-button">{buttonText}</button>,
 }));
 
 jest.mock('@/components/formikElements/apiLoading/apiProgress/apiProgress', () => ({
@@ -151,9 +149,7 @@ describe('PasswordClient', () => {
 		useAppSelector.mockReturnValue({ default_password_set: true });
 
 		renderWithProviders(<PasswordClient />);
-		expect(
-			screen.getByText(/Il est recommandé de changer votre mot de passe par défaut/),
-		).toBeInTheDocument();
+		expect(screen.getByText(/Il est recommandé de changer votre mot de passe par défaut/)).toBeInTheDocument();
 
 		useAppSelector.mockReturnValue(null);
 	});
@@ -163,9 +159,7 @@ describe('PasswordClient', () => {
 		useAppSelector.mockReturnValue({ default_password_set: false });
 
 		renderWithProviders(<PasswordClient />);
-		expect(
-			screen.queryByText(/Il est recommandé de changer votre mot de passe par défaut/),
-		).not.toBeInTheDocument();
+		expect(screen.queryByText(/Il est recommandé de changer votre mot de passe par défaut/)).not.toBeInTheDocument();
 
 		useAppSelector.mockReturnValue(null);
 	});
@@ -187,9 +181,7 @@ describe('PasswordClient', () => {
 
 		renderWithProviders(<PasswordClient />);
 		expect(screen.getAllByText('Modifier le mot de passe').length).toBeGreaterThan(0);
-		expect(
-			screen.queryByText(/Il est recommandé de changer votre mot de passe par défaut/),
-		).not.toBeInTheDocument();
+		expect(screen.queryByText(/Il est recommandé de changer votre mot de passe par défaut/)).not.toBeInTheDocument();
 
 		useAppSelector.mockReturnValue(null);
 	});
@@ -200,9 +192,7 @@ describe('PasswordClient', () => {
 
 		renderWithProviders(<PasswordClient />);
 		expect(screen.getAllByText('Modifier le mot de passe').length).toBeGreaterThan(0);
-		expect(
-			screen.queryByText(/Il est recommandé de changer votre mot de passe par défaut/),
-		).not.toBeInTheDocument();
+		expect(screen.queryByText(/Il est recommandé de changer votre mot de passe par défaut/)).not.toBeInTheDocument();
 
 		useAppSelector.mockReturnValue(null);
 	});

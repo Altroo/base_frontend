@@ -12,7 +12,11 @@ jest.mock('@/utils/themes', () => ({
 }));
 
 jest.mock('@/utils/hooks', () => ({
-	useLanguage: () => ({ language: 'fr', setLanguage: jest.fn(), t: jest.requireActual('@/translations').translations.fr }),
+	useLanguage: () => ({
+		language: 'fr',
+		setLanguage: jest.fn(),
+		t: jest.requireActual('@/translations').translations.fr,
+	}),
 }));
 
 // Mock loading spinner

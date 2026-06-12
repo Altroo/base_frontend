@@ -16,11 +16,11 @@ describe('Redux selectors', () => {
 		'2023-01-01T12:00:00Z',
 		'2023-12-01T08:30:00Z',
 		'2023-12-01T08:30:00Z',
-		true,   // can_view
-		false,  // can_print
-		true,   // can_create
-		false,  // can_edit
-		false,  // can_delete
+		true, // can_view
+		false, // can_print
+		true, // can_create
+		false, // can_edit
+		false, // can_delete
 	);
 
 	const mockState = {

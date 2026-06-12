@@ -189,7 +189,16 @@ const CustomFilterPanel: React.FC<CustomFilterPanelProps> = ({ columns, filterMo
 	const logicLabel = filterModel.logicOperator === GridLogicOperator.And ? t.filters.and : t.filters.or;
 
 	return (
-		<Box sx={{ p: 2, minWidth: 600, bgcolor: 'background.paper', borderRadius: 1, border: '1px solid', borderColor: 'divider' }}>
+		<Box
+			sx={{
+				p: 2,
+				minWidth: 600,
+				bgcolor: 'background.paper',
+				borderRadius: 1,
+				border: '1px solid',
+				borderColor: 'divider',
+			}}
+		>
 			<Stack spacing={1.5}>
 				{filterModel.items.map((item, index) => {
 					const column = columns.find((col) => col.field === item.field);
@@ -198,7 +207,14 @@ const CustomFilterPanel: React.FC<CustomFilterPanelProps> = ({ columns, filterMo
 					const InputComponent = currentOperator?.InputComponent ?? TextFilterInput;
 
 					return (
-						<Stack key={item.id} direction="row" spacing={1} alignItems="center">
+						<Stack
+							key={item.id}
+							spacing={1}
+							sx={{
+								direction: 'row',
+								alignItems: 'center',
+							}}
+						>
 							{/* Logic operator column - editable on 2nd row, read-only chip on 3rd+ */}
 							<Box sx={{ width: 80, flexShrink: 0 }}>
 								{index === 0 ? null : index === 1 ? (
@@ -260,7 +276,9 @@ const CustomFilterPanel: React.FC<CustomFilterPanelProps> = ({ columns, filterMo
 							<Box sx={{ minWidth: 200, flex: 1 }}>
 								<InputComponent
 									item={item}
-									applyValue={(updatedItem) => handleItemChange(item.id, { value: updatedItem.value as CustomFilterValue })}
+									applyValue={(updatedItem) =>
+										handleItemChange(item.id, { value: updatedItem.value as CustomFilterValue })
+									}
 								/>
 							</Box>
 
@@ -273,7 +291,12 @@ const CustomFilterPanel: React.FC<CustomFilterPanelProps> = ({ columns, filterMo
 				})}
 
 				{/* Add filter button row */}
-				<Stack direction="row" spacing={1} alignItems="center">
+				<Stack
+					spacing={1}
+					sx={{
+						direction: 'row',
+						alignItems: 'center'
+				}}>
 					<Box sx={{ width: 80, flexShrink: 0 }} />
 
 					<Button
@@ -284,16 +307,16 @@ const CustomFilterPanel: React.FC<CustomFilterPanelProps> = ({ columns, filterMo
 						disabled={filterableColumns.length === 0 || !filterModel.items.every(filterHasValue)}
 						sx={{ minWidth: 150 }}
 					>
-					{t.filters.addFilter}
-				</Button>
+						{t.filters.addFilter}
+					</Button>
 
-				{filterModel.items.length > 0 && (
-					<>
-						<Button onClick={handleClearAll} size="small" variant="text" color="error">
-							{t.filters.removeAllFilters}
-						</Button>
-						<Typography variant="caption" color="text.secondary" sx={{ ml: 'auto' }}>
-							{t.common.activeFiltersCount(filterModel.items.filter(filterHasValue).length)}
+					{filterModel.items.length > 0 && (
+						<>
+							<Button onClick={handleClearAll} size="small" variant="text" color="error">
+								{t.filters.removeAllFilters}
+							</Button>
+							<Typography variant="caption" color="text.secondary" sx={{ ml: 'auto' }}>
+								{t.common.activeFiltersCount(filterModel.items.filter(filterHasValue).length)}
 							</Typography>
 						</>
 					)}

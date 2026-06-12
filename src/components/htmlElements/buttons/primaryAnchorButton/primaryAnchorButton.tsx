@@ -36,9 +36,7 @@ const PrimaryAnchorButton = forwardRef<HTMLAnchorElement, Props>(
 				<ThemeProvider theme={getDefaultTheme()}>
 					<Button
 						onClick={props.onClick}
-						className={`${Styles.primaryButtonDisabled} 
-				${props.active ? `${Styles.primaryButtonActive}` : ''}
-				${props.cssClass && `${props.cssClass}`}`}
+						className={`${Styles.primaryButtonDisabled} ${props.active ? `${Styles.primaryButtonActive}` : ''} ${props.cssClass && `${props.cssClass}`}`}
 						disabled={!props.active}
 						type={props.type}
 						color="primary"

@@ -82,7 +82,7 @@ const CustomSquareImageUploading: React.FC<Props> = ({ image, croppedImage, onCh
 	const displayImage = showCropper ? image : croppedImage;
 
 	return (
-		<Stack className={`${Styles.rootStackWrapper} ${cssClasse}`} direction="row" alignItems="center">
+		<Stack className={`${Styles.rootStackWrapper} ${cssClasse}`} sx={{ direction: 'row', alignItems: 'center' }}>
 			<input
 				type="file"
 				accept="image/jpeg,image/png"
@@ -91,7 +91,10 @@ const CustomSquareImageUploading: React.FC<Props> = ({ image, croppedImage, onCh
 				onChange={handleFileChange}
 			/>
 			{displayImage ? (
-				<Stack className={Styles.addImagesWrapper} direction="row" justifyContent="center" alignItems="center">
+				<Stack
+					className={Styles.addImagesWrapper}
+					sx={{ direction: 'row', alignItems: 'center', justifyContent: 'center' }}
+				>
 					{showCropper ? (
 						<>
 							<Cropper

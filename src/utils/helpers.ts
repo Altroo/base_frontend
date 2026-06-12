@@ -80,9 +80,7 @@ export const isAuthenticatedInstance = (
 							status_code: error.response.status,
 							message: getT().errors.serverError,
 							details: {
-								error: [
-									getT().errors.networkCheckMessage,
-								],
+								error: [getT().errors.networkCheckMessage],
 							},
 						},
 					});
@@ -229,25 +227,14 @@ export const formatLocalDate = (date: Date): string => {
 	return `${year}-${month}-${day}`;
 };
 
-export const formatDateShort = (value: string | null, locale: 'fr' | 'en' = 'fr'): string => {
-	if (!value) return '—';
-	// Parse YYYY-MM-DD as local date to avoid timezone shift
-	const parts = value.split('-');
-	if (parts.length !== 3) return '—';
-	const date = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
-	if (Number.isNaN(date.getTime())) return '—';
-	return new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : 'fr-FR', {
-		year: 'numeric',
-		month: 'short',
-		day: '2-digit',
-	}).format(date);
-};
-
 export const formatNumber = (value: string | number | null | undefined, locale: 'fr' | 'en' = 'fr'): string => {
 	if (value === null || value === undefined) return '0,00';
 	const num = typeof value === 'string' ? parseFloat(value) : value;
 	if (Number.isNaN(num)) return '0,00';
-	return num.toLocaleString(locale === 'en' ? 'en-US' : 'fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+	return num.toLocaleString(locale === 'en' ? 'en-US' : 'fr-FR', {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2,
+	});
 };
 
 export const parseNumber = (value: string | number): number | null => {
@@ -266,8 +253,7 @@ export const parseNumber = (value: string | number): number | null => {
 export const getLabelForKey = (fieldLabels: Record<string, string>, key: string): string =>
 	fieldLabels[key] ?? key.replace(/_/g, ' ').replace(/\b\w/g, (ch) => ch.toUpperCase());
 
-export const normalizeStatut = (s: string): string =>
-	s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+export const normalizeStatut = (s: string): string => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
 /**
  * Extracts a user-friendly error message from an RTK Query mutation error.

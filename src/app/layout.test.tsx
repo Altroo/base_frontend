@@ -76,11 +76,6 @@ jest.mock('@/components/shared/sessionExpiredListener/sessionExpiredListener', (
 	},
 }));
 
-jest.mock('@/utils/serverTranslations', () => ({
-	__esModule: true,
-	getServerTranslations: () => Promise.resolve(jest.requireActual('@/translations/fr').fr),
-}));
-
 jest.mock('@/contexts/languageContext', () => ({
 	__esModule: true,
 	LanguageContextProvider: (props: { children?: unknown }) => {

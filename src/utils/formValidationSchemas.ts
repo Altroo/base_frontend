@@ -9,7 +9,6 @@ import {
 } from '@/utils/formValidationErrorMessages';
 import { getT } from '@/utils/helpers';
 
-
 const base64ImageField = z.url().or(z.string().startsWith('data:image/')).nullable().optional();
 
 const passwordField = z.preprocess(
@@ -108,8 +107,14 @@ export const profilSchema = z.object({
 
 export const changePasswordSchema = z
 	.object({
-		old_password: z.string().min(1, { error: INPUT_REQUIRED }).min(8, { error: () => INPUT_PASSWORD_MIN(8) }),
-		new_password: z.string().min(1, { error: INPUT_REQUIRED }).min(8, { error: () => INPUT_PASSWORD_MIN(8) }),
+		old_password: z
+			.string()
+			.min(1, { error: INPUT_REQUIRED })
+			.min(8, { error: () => INPUT_PASSWORD_MIN(8) }),
+		new_password: z
+			.string()
+			.min(1, { error: INPUT_REQUIRED })
+			.min(8, { error: () => INPUT_PASSWORD_MIN(8) }),
 		new_password2: z.string().min(1, { error: INPUT_REQUIRED }),
 		globalError: z.string().optional(),
 	})
@@ -122,4 +127,3 @@ export const changePasswordSchema = z
 			});
 		}
 	});
-

@@ -13,7 +13,10 @@ type Props = {
 // '#FFFFFF'
 const ApiProgress: React.FC<Props> = (props: Props) => {
 	return (
-		<Backdrop sx={{ backgroundColor: props.backdropColor, zIndex: (theme) => theme.zIndex.drawer + 1 }} open={props.backdropOpen ?? true}>
+		<Backdrop
+			sx={{ backgroundColor: props.backdropColor, zIndex: (theme) => theme.zIndex.drawer + 1 }}
+			open={props.backdropOpen ?? true}
+		>
 			<CircularProgress data-testid="api-loader" sx={{ color: props.circularColor }} />
 		</Backdrop>
 	);

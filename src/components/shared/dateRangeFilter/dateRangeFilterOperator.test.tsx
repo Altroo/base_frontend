@@ -7,7 +7,11 @@ import { createDateRangeFilterOperator } from './dateRangeFilterOperator';
 import React from 'react';
 
 jest.mock('@/utils/hooks', () => ({
-	useLanguage: () => ({ language: 'fr', setLanguage: jest.fn(), t: jest.requireActual('@/translations').translations.fr }),
+	useLanguage: () => ({
+		language: 'fr',
+		setLanguage: jest.fn(),
+		t: jest.requireActual('@/translations').translations.fr,
+	}),
 }));
 
 describe('dateRangeFilterOperator', () => {
@@ -183,7 +187,9 @@ describe('dateRangeFilterOperator', () => {
 			};
 
 			if (InputComponent) {
-				const { container } = render(<InputComponent item={mockItem} applyValue={mockApplyValue} apiRef={mockApiRef} />);
+				const { container } = render(
+					<InputComponent item={mockItem} applyValue={mockApplyValue} apiRef={mockApiRef} />,
+				);
 
 				// Component renders without error
 				expect(container).toBeInTheDocument();
@@ -216,7 +222,9 @@ describe('dateRangeFilterOperator', () => {
 			};
 
 			if (InputComponent) {
-				const { container } = render(<InputComponent item={mockItem} applyValue={mockApplyValue} apiRef={mockApiRef} />);
+				const { container } = render(
+					<InputComponent item={mockItem} applyValue={mockApplyValue} apiRef={mockApiRef} />,
+				);
 
 				// Both date pickers are rendered
 				expect(container).toBeInTheDocument();
@@ -234,7 +242,9 @@ describe('dateRangeFilterOperator', () => {
 			};
 
 			if (InputComponent) {
-				const { container } = render(<InputComponent item={mockItem} applyValue={mockApplyValue} apiRef={mockApiRef} />);
+				const { container } = render(
+					<InputComponent item={mockItem} applyValue={mockApplyValue} apiRef={mockApiRef} />,
+				);
 
 				// Both date pickers are rendered
 				expect(container).toBeInTheDocument();
@@ -252,7 +262,9 @@ describe('dateRangeFilterOperator', () => {
 			};
 
 			if (InputComponent) {
-				const { container } = render(<InputComponent item={mockItem} applyValue={mockApplyValue} apiRef={mockApiRef} />);
+				const { container } = render(
+					<InputComponent item={mockItem} applyValue={mockApplyValue} apiRef={mockApiRef} />,
+				);
 
 				// InputComponent renders without calling applyValue on mount
 				expect(container).toBeInTheDocument();
@@ -269,7 +281,9 @@ describe('dateRangeFilterOperator', () => {
 			};
 
 			if (InputComponent) {
-				const { container } = render(<InputComponent item={mockItem} applyValue={mockApplyValue} apiRef={mockApiRef} />);
+				const { container } = render(
+					<InputComponent item={mockItem} applyValue={mockApplyValue} apiRef={mockApiRef} />,
+				);
 				expect(container).toBeInTheDocument();
 				// Component initializes with provided dates
 				expect(screen.getAllByText('De').length).toBeGreaterThan(0);

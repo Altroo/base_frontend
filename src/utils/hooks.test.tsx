@@ -9,9 +9,7 @@ import '@testing-library/jest-dom';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { store } from '@/store/store';
 
-const wrapper = ({ children }: { children: React.ReactNode }) => (
-	<Provider store={store}>{children}</Provider>
-);
+const wrapper = ({ children }: { children: React.ReactNode }) => <Provider store={store}>{children}</Provider>;
 
 describe('useAppDispatch', () => {
 	it('returns a dispatch function', () => {

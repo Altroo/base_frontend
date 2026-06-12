@@ -67,7 +67,7 @@ jest.mock('@/utils/apiHelpers', () => ({
 jest.mock('@/utils/helpers', () => ({
 	allowAnyInstance: () => ({}),
 	setFormikAutoErrors: (p: unknown) => mockSetFormikAutoErrors(p),
-	hexToRGB: (hex: string, alpha = 1) => `rgba(0,0,0,${alpha})`,
+	hexToRGB: (_hex: string, alpha = 1) => `rgba(0,0,0,${alpha})`,
 }));
 
 jest.mock('zod-formik-adapter', () => ({

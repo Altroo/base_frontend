@@ -11,8 +11,7 @@ const mockStore = configureStore({
 		_init: () => ({}),
 		account: () => ({}),
 	},
-	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware({ serializableCheck: false }),
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
 });
 
 // Mock next/navigation
@@ -50,8 +49,7 @@ const mockCheckEmailMutation = jest.fn();
 
 jest.mock('@/store/services/account', () => ({
 	__esModule: true,
-	useGetUserQuery: (params: { id: number }, options: { skip: boolean }) =>
-		mockUseGetUserQuery(params, options),
+	useGetUserQuery: (params: { id: number }, options: { skip: boolean }) => mockUseGetUserQuery(params, options),
 	useAddUserMutation: () => [mockAddUserMutation, { isLoading: false, error: undefined }],
 	useCheckEmailMutation: () => [mockCheckEmailMutation, { isLoading: false, error: undefined }],
 	useEditUserMutation: () => [mockEditUserMutation, { isLoading: false, error: undefined }],
@@ -69,7 +67,7 @@ jest.mock('@/components/layouts/navigationBar/navigationBar', () => {
 	return { __esModule: true, default: Mock };
 });
 
-// Mock form sub-components
+// Mock form subcomponents
 jest.mock('@/components/formikElements/customTextInput/customTextInput', () => ({
 	__esModule: true,
 	default: ({ id, label }: { id: string; label: string }) => (
@@ -123,7 +121,10 @@ jest.mock('@/utils/helpers', () => ({
 }));
 
 jest.mock('@/utils/rawData', () => ({
-	genderItemsList: jest.fn(() => [{ value: 'H', label: 'Homme' }, { value: 'F', label: 'Femme' }]),
+	genderItemsList: jest.fn(() => [
+		{ value: 'H', label: 'Homme' },
+		{ value: 'F', label: 'Femme' },
+	]),
 }));
 
 jest.mock('@/utils/formValidationSchemas', () => ({

@@ -4,7 +4,11 @@ import CustomFilterPanel, { filterHasValue, type CustomFilterItem, type CustomFi
 import { GridLogicOperator, type GridColDef } from '@mui/x-data-grid';
 
 jest.mock('@/utils/hooks', () => ({
-	useLanguage: () => ({ language: 'fr', setLanguage: jest.fn(), t: jest.requireActual('@/translations').translations.fr }),
+	useLanguage: () => ({
+		language: 'fr',
+		setLanguage: jest.fn(),
+		t: jest.requireActual('@/translations').translations.fr,
+	}),
 }));
 
 const mockColumns: GridColDef[] = [

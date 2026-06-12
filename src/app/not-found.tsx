@@ -15,7 +15,7 @@ const NotFound = () => {
 		<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', p: 3 }}>
 			<Paper elevation={3} sx={{ p: 4, maxWidth: 500, textAlign: 'center' }}>
 				<SadIcon sx={{ fontSize: 80, color: 'text.secondary', mb: 2 }} />
-				<Typography variant="h4" gutterBottom fontWeight={700}>
+				<Typography variant="h4" gutterBottom sx={{ fontWeight: 700 }}>
 					404
 				</Typography>
 				<Typography variant="h6" gutterBottom>

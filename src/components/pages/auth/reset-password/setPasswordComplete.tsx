@@ -22,8 +22,8 @@ const SetPasswordCompleteClient: React.FC = () => {
 					<AuthLayout>
 						<Stack direction="column" spacing={4} className={Styles.contentWrapper}>
 							<Image src={SuccessIlluSVG} alt="" width="0" height="0" sizes="100vw" className={Styles.logo} />
-						<h1 className={Styles.header}>{t.auth.passwordChanged}</h1>
-						<p className={Styles.subHeader}>{t.auth.passwordChangedMessage}</p>
+							<h1 className={Styles.header}>{t.auth.passwordChanged}</h1>
+							<p className={Styles.subHeader}>{t.auth.passwordChangedMessage}</p>
 							<PrimaryAnchorButton
 								startIcon={<LoginIcon />}
 								buttonText={t.auth.loginButton}
@@ -39,8 +39,8 @@ const SetPasswordCompleteClient: React.FC = () => {
 					<main className={Styles.main}>
 						<Stack direction="column" spacing={4} className={Styles.contentWrapper}>
 							<Image src={SuccessIlluSVG} alt="" width="0" height="0" sizes="100vw" className={Styles.logo} />
-						<h1 className={Styles.header}>{t.auth.passwordChanged}</h1>
-						<p className={Styles.subHeader}>{t.auth.passwordChangedMessage}</p>
+							<h1 className={Styles.header}>{t.auth.passwordChanged}</h1>
+							<p className={Styles.subHeader}>{t.auth.passwordChangedMessage}</p>
 						</Stack>
 						<div className={Styles.primaryButtonWrapper}>
 							<PrimaryAnchorButton

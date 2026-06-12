@@ -4,16 +4,16 @@ import CustomToast from './customToast';
 import '@testing-library/jest-dom';
 
 // Mock MUI icon modules used by the component
-jest.mock('@mui/icons-material/CheckCircleOutline', () => {
+jest.mock('@mui/icons-material/CheckCircleOutlined', () => {
 	return {
 		__esModule: true,
-		default: (props: React.SVGProps<SVGSVGElement>) => <svg data-testid="CheckCircleOutlineIcon" {...props} />,
+		default: (props: React.SVGProps<SVGSVGElement>) => <svg data-testid="CheckCircleOutlinedIcon" {...props} />,
 	};
 });
-jest.mock('@mui/icons-material/ErrorOutline', () => {
+jest.mock('@mui/icons-material/ErrorOutlined', () => {
 	return {
 		__esModule: true,
-		default: (props: React.SVGProps<SVGSVGElement>) => <svg data-testid="ErrorOutlineIcon" {...props} />,
+		default: (props: React.SVGProps<SVGSVGElement>) => <svg data-testid="ErrorOutlinedIcon" {...props} />,
 	};
 });
 jest.mock('@mui/icons-material/InfoOutlined', () => {

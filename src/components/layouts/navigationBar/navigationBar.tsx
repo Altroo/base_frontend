@@ -228,8 +228,8 @@ const NavigationBar = (props: Props) => {
 			<Box sx={{ display: 'flex' }}>
 				<AppBar position="fixed" open={open}>
 					<Toolbar>
-						<Stack direction="row" justifyContent="space-between" alignItems="center" width="100%">
-							<Stack direction="row" alignItems="center" spacing={1}>
+						<Stack sx={{ direction: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+							<Stack spacing={1} sx={{ direction: 'row', alignItems: 'center' }}>
 								{isMobile && (
 									<IconButton
 										color="inherit"
@@ -250,7 +250,14 @@ const NavigationBar = (props: Props) => {
 										<Desktop>
 											<LanguageSwitcher />
 											{is_staff && (
-												<Button variant="text" color="inherit" href={BACKEND_SITE_ADMIN} target="_blank" rel="noopener" endIcon={<DomainIcon />}>
+												<Button
+													variant="text"
+													color="inherit"
+													href={BACKEND_SITE_ADMIN}
+													target="_blank"
+													rel="noopener"
+													endIcon={<DomainIcon />}
+												>
 													{t.navigation.administration}
 												</Button>
 											)}
@@ -259,36 +266,58 @@ const NavigationBar = (props: Props) => {
 											</Button>
 										</Desktop>
 										<TabletAndMobile>
-										<IconButton
-											ref={moreVertRef}
-											color="inherit"
-											aria-label={t.accessibility.moreActions}
-											onClick={(e) => setMobileMenuAnchor(e.currentTarget)}
-										>
-											<MoreVertIcon />
-										</IconButton>
-										<Menu
-											anchorEl={mobileMenuAnchor}
-											open={Boolean(mobileMenuAnchor)}
-											onClose={() => setMobileMenuAnchor(null)}
-											anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-											transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-										>
-											<MenuItem onClick={() => { setLanguage(language === 'fr' ? 'en' : 'fr'); setMobileMenuAnchor(null); }}>
-												<MenuListItemIcon><span style={{ fontSize: '1.2rem', lineHeight: 1 }}>{language === 'fr' ? '🇬🇧' : '🇫🇷'}</span></MenuListItemIcon>
-												<MenuListItemText>{language === 'fr' ? 'English' : 'Français'}</MenuListItemText>
-											</MenuItem>
-											{is_staff && (
-												<MenuItem component="a" href={BACKEND_SITE_ADMIN} target="_blank" rel="noopener" onClick={() => setMobileMenuAnchor(null)}>
-													<MenuListItemIcon><DomainIcon fontSize="small" /></MenuListItemIcon>
-													<MenuListItemText>{t.navigation.administration}</MenuListItemText>
+											<IconButton
+												ref={moreVertRef}
+												color="inherit"
+												aria-label={t.accessibility.moreActions}
+												onClick={(e) => setMobileMenuAnchor(e.currentTarget)}
+											>
+												<MoreVertIcon />
+											</IconButton>
+											<Menu
+												anchorEl={mobileMenuAnchor}
+												open={Boolean(mobileMenuAnchor)}
+												onClose={() => setMobileMenuAnchor(null)}
+												anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+												transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+											>
+												<MenuItem
+													onClick={() => {
+														setLanguage(language === 'fr' ? 'en' : 'fr');
+														setMobileMenuAnchor(null);
+													}}
+												>
+													<MenuListItemIcon>
+														<span style={{ fontSize: '1.2rem', lineHeight: 1 }}>{language === 'fr' ? '🇬🇧' : '🇫🇷'}</span>
+													</MenuListItemIcon>
+													<MenuListItemText>{language === 'fr' ? 'English' : 'Français'}</MenuListItemText>
 												</MenuItem>
-											)}
-											<MenuItem onClick={() => { setMobileMenuAnchor(null); void logOutHandler(); }}>
-												<MenuListItemIcon><LogoutIcon fontSize="small" /></MenuListItemIcon>
-												<MenuListItemText>{t.navigation.logout}</MenuListItemText>
-											</MenuItem>
-										</Menu>
+												{is_staff && (
+													<MenuItem
+														component="a"
+														href={BACKEND_SITE_ADMIN}
+														target="_blank"
+														rel="noopener"
+														onClick={() => setMobileMenuAnchor(null)}
+													>
+														<MenuListItemIcon>
+															<DomainIcon fontSize="small" />
+														</MenuListItemIcon>
+														<MenuListItemText>{t.navigation.administration}</MenuListItemText>
+													</MenuItem>
+												)}
+												<MenuItem
+													onClick={() => {
+														setMobileMenuAnchor(null);
+														void logOutHandler();
+													}}
+												>
+													<MenuListItemIcon>
+														<LogoutIcon fontSize="small" />
+													</MenuListItemIcon>
+													<MenuListItemText>{t.navigation.logout}</MenuListItemText>
+												</MenuItem>
+											</Menu>
 										</TabletAndMobile>
 									</>
 								)}
@@ -337,7 +366,11 @@ const NavigationBar = (props: Props) => {
 						)}
 						<Box sx={{ display: 'flex', flexDirection: 'column' }}>
 							<Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
-							{gender === 'Homme' ? t.navigation.welcomeMale : gender === 'Femme' ? t.navigation.welcomeFemale : t.navigation.welcomeNeutral}
+								{gender === 'Homme'
+									? t.navigation.welcomeMale
+									: gender === 'Femme'
+										? t.navigation.welcomeFemale
+										: t.navigation.welcomeNeutral}
 							</Typography>
 							<Typography variant="body2" sx={{ color: 'text.secondary' }}>
 								{first_name} {last_name}

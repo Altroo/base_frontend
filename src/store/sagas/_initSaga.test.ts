@@ -25,11 +25,10 @@ describe('init sagas', () => {
 		};
 
 		const dispatched: unknown[] = [];
-		await runSaga(
-			{ dispatch: (action: unknown) => dispatched.push(action) },
-			initAppSessionTokensSaga,
-			{ type: Types.INIT_APP_SESSION_TOKENS, session: mockSession as never },
-		).toPromise();
+		await runSaga({ dispatch: (action: unknown) => dispatched.push(action) }, initAppSessionTokensSaga, {
+			type: Types.INIT_APP_SESSION_TOKENS,
+			session: mockSession as never,
+		}).toPromise();
 
 		const expectedToken: InitStateToken = {
 			user: mockSession.user,
@@ -85,18 +84,12 @@ describe('init sagas', () => {
 		const gen = watchInit();
 
 		const firstEffect = gen.next().value;
-		expect(firstEffect).toEqual(
-			takeLatest(Types.INIT_APP, initAppSaga),
-		);
+		expect(firstEffect).toEqual(takeLatest(Types.INIT_APP, initAppSaga));
 
 		const secondEffect = gen.next().value;
-		expect(secondEffect).toEqual(
-			takeLatest(Types.INIT_APP_SESSION_TOKENS, initAppSessionTokensSaga),
-		);
+		expect(secondEffect).toEqual(takeLatest(Types.INIT_APP_SESSION_TOKENS, initAppSessionTokensSaga));
 
 		const thirdEffect = gen.next().value;
-		expect(thirdEffect).toEqual(
-			takeLatest(Types.REFRESH_APP_TOKEN_STATES, refreshAppTokenStatesSaga),
-		);
+		expect(thirdEffect).toEqual(takeLatest(Types.REFRESH_APP_TOKEN_STATES, refreshAppTokenStatesSaga));
 	});
 });

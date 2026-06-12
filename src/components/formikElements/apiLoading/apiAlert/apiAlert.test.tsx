@@ -6,7 +6,11 @@ import type { SxProps } from '@mui/system';
 import type { Theme } from '@mui/material/styles';
 
 jest.mock('@/utils/hooks', () => ({
-	useLanguage: () => ({ language: 'fr', setLanguage: jest.fn(), t: jest.requireActual('@/translations').translations.fr }),
+	useLanguage: () => ({
+		language: 'fr',
+		setLanguage: jest.fn(),
+		t: jest.requireActual('@/translations').translations.fr,
+	}),
 }));
 
 describe('ApiAlert', () => {

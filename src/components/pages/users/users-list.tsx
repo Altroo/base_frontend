@@ -91,7 +91,13 @@ const UsersListClient: React.FC<SessionProps> = ({ session }: SessionProps) => {
 	};
 
 	const deleteModalActions = [
-		{ text: t.common.cancel, active: false, onClick: () => setShowDeleteModal(false), icon: <CloseIcon />, color: '#6B6B6B' },
+		{
+			text: t.common.cancel,
+			active: false,
+			onClick: () => setShowDeleteModal(false),
+			icon: <CloseIcon />,
+			color: '#6B6B6B',
+		},
 		{ text: t.common.delete, active: true, onClick: deleteHandler, icon: <DeleteIcon />, color: '#D32F2F' },
 	];
 
@@ -118,8 +124,20 @@ const UsersListClient: React.FC<SessionProps> = ({ session }: SessionProps) => {
 	};
 
 	const bulkDeleteModalActions = [
-		{ text: t.common.cancel, active: false, onClick: () => setShowBulkDeleteModal(false), icon: <CloseIcon />, color: '#6B6B6B' },
-		{ text: `${t.common.delete} (${selectedUserIds.length})`, active: true, onClick: bulkDeleteHandler, icon: <DeleteIcon />, color: '#D32F2F' },
+		{
+			text: t.common.cancel,
+			active: false,
+			onClick: () => setShowBulkDeleteModal(false),
+			icon: <CloseIcon />,
+			color: '#6B6B6B',
+		},
+		{
+			text: `${t.common.delete} (${selectedUserIds.length})`,
+			active: true,
+			onClick: bulkDeleteHandler,
+			icon: <DeleteIcon />,
+			color: '#D32F2F',
+		},
 	];
 
 	const genderFilterOptions = React.useMemo(
@@ -342,11 +360,14 @@ const UsersListClient: React.FC<SessionProps> = ({ session }: SessionProps) => {
 
 	return (
 		<Stack
-			direction="column"
 			spacing={2}
 			className={Styles.flexRootStack}
-			mt="48px"
-			sx={{ overflowX: 'auto', overflowY: 'hidden' }}
+			sx={{
+				direction: 'column',
+				mt: '48px',
+				overflowX: 'auto',
+				overflowY: 'hidden',
+			}}
 		>
 			<NavigationBar title={t.navigation.usersList}>
 				<Protected>
@@ -411,8 +432,8 @@ const UsersListClient: React.FC<SessionProps> = ({ session }: SessionProps) => {
 						/>
 						{showDeleteModal && (
 							<ActionModals
-							title={t.users.deleteUser}
-							body={t.users.deleteUserConfirm}
+								title={t.users.deleteUser}
+								body={t.users.deleteUserConfirm}
 								actions={deleteModalActions}
 								titleIcon={<DeleteIcon />}
 								titleIconColor="#D32F2F"
@@ -420,8 +441,8 @@ const UsersListClient: React.FC<SessionProps> = ({ session }: SessionProps) => {
 						)}
 						{showBulkDeleteModal && (
 							<ActionModals
-							title={t.users.deleteUsers(selectedUserIds.length)}
-							body={t.users.bulkDeleteUserBody(selectedUserIds.length)}
+								title={t.users.deleteUsers(selectedUserIds.length)}
+								body={t.users.bulkDeleteUserBody(selectedUserIds.length)}
 								actions={bulkDeleteModalActions}
 								titleIcon={<DeleteIcon />}
 								titleIconColor="#D32F2F"

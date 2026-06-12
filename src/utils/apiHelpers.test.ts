@@ -44,10 +44,9 @@ describe('cookiesDeleter', () => {
 
 		const result = await cookiesDeleter('/api/cookies', { key: 'token' });
 		expect(result).toEqual({ status: 204 });
-		expect((mockedAxios as unknown as { __mockDelete: jest.Mock }).__mockDelete).toHaveBeenCalledWith(
-			'/api/cookies',
-			{ data: { key: 'token' } },
-		);
+		expect((mockedAxios as unknown as { __mockDelete: jest.Mock }).__mockDelete).toHaveBeenCalledWith('/api/cookies', {
+			data: { key: 'token' },
+		});
 	});
 });
 

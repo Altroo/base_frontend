@@ -20,7 +20,10 @@ export const LanguageContext = createContext<LanguageContextType>({
 	t: translations[DEFAULT_LANGUAGE],
 });
 
-export const LanguageContextProvider: React.FC<{ children: React.ReactNode; initialLanguage?: Language }> = ({ children, initialLanguage }) => {
+export const LanguageContextProvider: React.FC<{ children: React.ReactNode; initialLanguage?: Language }> = ({
+	children,
+	initialLanguage,
+}) => {
 	const [language, setLanguageState] = useState<Language>(initialLanguage ?? DEFAULT_LANGUAGE);
 
 	useEffect(() => {
@@ -40,9 +43,5 @@ export const LanguageContextProvider: React.FC<{ children: React.ReactNode; init
 
 	const t = translations[language];
 
-	return (
-		<LanguageContext.Provider value={{ language, setLanguage, t }}>
-			{children}
-		</LanguageContext.Provider>
-	);
+	return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>;
 };

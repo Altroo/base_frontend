@@ -191,7 +191,7 @@ jest.mock('@/components/shared/dateRangeFilter/dateRangeFilterOperator', () => (
 
 jest.mock('@/utils/helpers', () => ({
 	formatDate: (date: string | null) => (date ? new Date(date).toLocaleDateString('fr-FR') : '—'),
-	extractApiErrorMessage: (error: unknown, fallback: string) => fallback,
+	extractApiErrorMessage: (_error: unknown, fallback: string) => fallback,
 }));
 
 jest.mock('next/image', () => ({
@@ -290,23 +290,33 @@ describe('UsersListClient', () => {
 
 		it('opens delete modal', async () => {
 			render(<UsersListClient />);
-			await act(async () => { fireEvent.click(screen.getAllByText('Supprimer')[0]); });
+			await act(async () => {
+				fireEvent.click(screen.getAllByText('Supprimer')[0]);
+			});
 			expect(screen.getByTestId('action-modal')).toBeInTheDocument();
 			expect(screen.getByText('Supprimer cet utilisateur ?')).toBeInTheDocument();
 		});
 
 		it('closes delete modal on Annuler', async () => {
 			render(<UsersListClient />);
-			await act(async () => { fireEvent.click(screen.getAllByText('Supprimer')[0]); });
-			await act(async () => { fireEvent.click(screen.getByText('Annuler')); });
+			await act(async () => {
+				fireEvent.click(screen.getAllByText('Supprimer')[0]);
+			});
+			await act(async () => {
+				fireEvent.click(screen.getByText('Annuler'));
+			});
 			expect(screen.queryByTestId('action-modal')).not.toBeInTheDocument();
 		});
 
 		it('deletes user on confirm', async () => {
 			render(<UsersListClient />);
-			await act(async () => { fireEvent.click(screen.getAllByText('Supprimer')[0]); });
+			await act(async () => {
+				fireEvent.click(screen.getAllByText('Supprimer')[0]);
+			});
 			const btns = screen.getAllByText('Supprimer');
-			await act(async () => { fireEvent.click(btns[btns.length - 1]); });
+			await act(async () => {
+				fireEvent.click(btns[btns.length - 1]);
+			});
 			await waitFor(() => {
 				expect(mockDeleteUser).toHaveBeenCalled();
 				expect(mockOnSuccess).toHaveBeenCalledWith('Utilisateur supprimé avec succès');
@@ -316,9 +326,13 @@ describe('UsersListClient', () => {
 		it('handles delete error', async () => {
 			mockDeleteUser.mockReturnValueOnce({ unwrap: () => Promise.reject(new Error('fail')) });
 			render(<UsersListClient />);
-			await act(async () => { fireEvent.click(screen.getAllByText('Supprimer')[0]); });
+			await act(async () => {
+				fireEvent.click(screen.getAllByText('Supprimer')[0]);
+			});
 			const btns = screen.getAllByText('Supprimer');
-			await act(async () => { fireEvent.click(btns[btns.length - 1]); });
+			await act(async () => {
+				fireEvent.click(btns[btns.length - 1]);
+			});
 			await waitFor(() => {
 				expect(mockOnError).toHaveBeenCalledWith("Erreur lors de la suppression de l'utilisateur");
 			});
@@ -328,7 +342,18 @@ describe('UsersListClient', () => {
 	describe('Column headers', () => {
 		it('renders all expected column headers', () => {
 			render(<UsersListClient />);
-			for (const h of ['Avatar', 'Nom', 'Prénom', 'Email', 'Genre', 'Admin', 'Active', "Date d'inscription", 'Dernière connexion', 'Actions']) {
+			for (const h of [
+				'Avatar',
+				'Nom',
+				'Prénom',
+				'Email',
+				'Genre',
+				'Admin',
+				'Active',
+				"Date d'inscription",
+				'Dernière connexion',
+				'Actions',
+			]) {
 				expect(screen.getByText(h)).toBeInTheDocument();
 			}
 		});
@@ -336,13 +361,21 @@ describe('UsersListClient', () => {
 
 	describe('Loading and empty states', () => {
 		it('renders grid when loading', () => {
-			mockUseGetUsersListQuery.mockReturnValueOnce({ data: { results: [], count: 0, next: null, previous: null }, isLoading: true, refetch: mockRefetch });
+			mockUseGetUsersListQuery.mockReturnValueOnce({
+				data: { results: [], count: 0, next: null, previous: null },
+				isLoading: true,
+				refetch: mockRefetch,
+			});
 			render(<UsersListClient />);
 			expect(screen.getByTestId('paginated-data-grid')).toBeInTheDocument();
 		});
 
 		it('renders grid when empty', () => {
-			mockUseGetUsersListQuery.mockReturnValueOnce({ data: { results: [], count: 0, next: null, previous: null }, isLoading: false, refetch: mockRefetch });
+			mockUseGetUsersListQuery.mockReturnValueOnce({
+				data: { results: [], count: 0, next: null, previous: null },
+				isLoading: false,
+				refetch: mockRefetch,
+			});
 			render(<UsersListClient />);
 			expect(screen.getByTestId('paginated-data-grid')).toBeInTheDocument();
 		});

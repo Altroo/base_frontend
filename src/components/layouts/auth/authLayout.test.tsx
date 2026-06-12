@@ -3,7 +3,11 @@ import AuthLayout from './authLayout';
 import '@testing-library/jest-dom';
 
 jest.mock('@/utils/hooks', () => ({
-	useLanguage: () => ({ language: 'fr', setLanguage: jest.fn(), t: jest.requireActual('@/translations').translations.fr }),
+	useLanguage: () => ({
+		language: 'fr',
+		setLanguage: jest.fn(),
+		t: jest.requireActual('@/translations').translations.fr,
+	}),
 }));
 
 describe('AuthLayout', () => {

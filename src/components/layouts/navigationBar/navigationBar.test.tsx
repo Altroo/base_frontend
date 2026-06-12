@@ -119,7 +119,6 @@ describe('NavigationBar', () => {
 		).toBeTruthy();
 	});
 
-
 	it('shows Utilisateurs section for staff users', () => {
 		mockUseAppSelector.mockImplementation(() => ({
 			avatar_cropped: undefined,
@@ -149,12 +148,13 @@ describe('NavigationBar', () => {
 		expect(screen.queryByText('Utilisateurs')).not.toBeInTheDocument();
 	});
 
-
 	it('drawer toggle button only appears on mobile', async () => {
 		mockIsMobile = false;
 		const { rerender } = render(
 			<Provider store={store}>
-				<NavigationBar title="D"><div /></NavigationBar>
+				<NavigationBar title="D">
+					<div />
+				</NavigationBar>
 			</Provider>,
 		);
 		expect(screen.queryByLabelText('Basculer le tiroir de navigation')).not.toBeInTheDocument();
@@ -162,7 +162,9 @@ describe('NavigationBar', () => {
 		mockIsMobile = true;
 		rerender(
 			<Provider store={store}>
-				<NavigationBar title="D2"><div /></NavigationBar>
+				<NavigationBar title="D2">
+					<div />
+				</NavigationBar>
 			</Provider>,
 		);
 		const toggleBtn = screen.getByLabelText('Basculer le tiroir de navigation');

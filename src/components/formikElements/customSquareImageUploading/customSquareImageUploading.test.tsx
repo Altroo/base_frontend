@@ -38,7 +38,11 @@ jest.mock('next/image', () => {
 });
 
 jest.mock('@/utils/hooks', () => ({
-	useLanguage: () => ({ language: 'fr', setLanguage: jest.fn(), t: jest.requireActual('@/translations').translations.fr }),
+	useLanguage: () => ({
+		language: 'fr',
+		setLanguage: jest.fn(),
+		t: jest.requireActual('@/translations').translations.fr,
+	}),
 }));
 
 // Mock react-cropper to capture and expose callbacks
@@ -278,12 +282,7 @@ describe('CustomSquareImageUploading (with MUI icon mock)', () => {
 
 	it('applies custom cssClasse', () => {
 		const { container } = render(
-			<CustomSquareImageUploading
-				image={null}
-				onChange={mockOnChange}
-				onCrop={mockOnCrop}
-				cssClasse="custom-class"
-			/>,
+			<CustomSquareImageUploading image={null} onChange={mockOnChange} onCrop={mockOnCrop} cssClasse="custom-class" />,
 		);
 
 		const wrapper = container.firstChild;

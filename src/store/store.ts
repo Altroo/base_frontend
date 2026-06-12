@@ -37,11 +37,7 @@ export const makeStore = (): SagaStore => {
 				thunk: true,
 			})
 				.prepend(sagaMw)
-				.concat(
-					accountApi.middleware,
-					profilApi.middleware,
-					usersApi.middleware,
-				),
+				.concat(accountApi.middleware, profilApi.middleware, usersApi.middleware),
 		devTools: process.env.NODE_ENV !== 'production',
 	}) as SagaStore;
 	s.sagaTask = sagaMw.run(rootSaga);

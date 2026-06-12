@@ -24,13 +24,13 @@ const DateRangeFilterInput: React.FC<GridFilterInputValueProps> = (props) => {
 	const handleFromChange = (date: Date | null) => {
 		setFromDate(date);
 		let effectiveToDate = toDate;
-		
+
 		// If new from date is after to date, adjust to date
 		if (date && toDate && date > toDate) {
 			effectiveToDate = date;
 			setToDate(date);
 		}
-		
+
 		const newValue: DateRangeValue = {
 			from: date ? formatLocalDate(date) : undefined,
 			to: effectiveToDate ? formatLocalDate(effectiveToDate) : formatLocalDate(new Date()),
@@ -83,7 +83,9 @@ const DateRangeFilterInput: React.FC<GridFilterInputValueProps> = (props) => {
 	);
 };
 
-export const createDateRangeFilterOperator = <T extends Record<string, unknown>>(filterLabel?: string): GridFilterOperator<T>[] => [
+export const createDateRangeFilterOperator = <T extends Record<string, unknown>>(
+	filterLabel?: string,
+): GridFilterOperator<T>[] => [
 	{
 		label: filterLabel ?? 'entre',
 		value: 'between',

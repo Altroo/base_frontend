@@ -33,8 +33,7 @@ export const InitEffects: React.FC = () => {
 
 	// Sync Redux tokens whenever the access token changes (covers initial login + every refresh)
 	useEffect(() => {
-		if (status === 'authenticated' && session?.accessToken &&
-			lastAccessTokenRef.current !== session.accessToken) {
+		if (status === 'authenticated' && session?.accessToken && lastAccessTokenRef.current !== session.accessToken) {
 			lastAccessTokenRef.current = session.accessToken;
 			dispatch(initAppSessionTokensAction(session));
 		}

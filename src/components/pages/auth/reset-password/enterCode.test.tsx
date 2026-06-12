@@ -58,7 +58,7 @@ jest.mock('@/utils/apiHelpers', () => ({
 
 jest.mock('@/utils/helpers', () => ({
 	setFormikAutoErrors: (...args: unknown[]) => mockSetFormikAutoErrors(...(args as unknown[])),
-	hexToRGB: (hex: string, alpha = 1) => `rgba(0,0,0,${alpha})`,
+	hexToRGB: (_hex: string, alpha = 1) => `rgba(0,0,0,${alpha})`,
 }));
 
 describe('EnterCodeClient', () => {
@@ -89,11 +89,9 @@ describe('EnterCodeClient', () => {
 		expect(screen.getAllByText('Renvoyer le code').length).toBeGreaterThanOrEqual(1);
 	});
 
-	it(
-		'typing digits moves focus and updates combined code then submits successfully',
-		async () => {
-			await act(async () => {
-				render(
+	it('typing digits moves focus and updates combined code then submits successfully', async () => {
+		await act(async () => {
+			render(
 				<Provider store={store}>
 					<EnterCodeClient email={testEmail} />
 				</Provider>,

@@ -5,7 +5,11 @@ import { Edit as EditIcon, Delete as DeleteIcon, Visibility as VisibilityIcon } 
 import '@testing-library/jest-dom';
 
 jest.mock('@/utils/hooks', () => ({
-	useLanguage: () => ({ language: 'fr', setLanguage: jest.fn(), t: jest.requireActual('@/translations').translations.fr }),
+	useLanguage: () => ({
+		language: 'fr',
+		setLanguage: jest.fn(),
+		t: jest.requireActual('@/translations').translations.fr,
+	}),
 }));
 
 // Mock useMediaQuery

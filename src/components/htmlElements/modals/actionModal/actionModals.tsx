@@ -22,14 +22,23 @@ type Props = {
 	onClose?: () => void;
 };
 
-const ActionModals: React.FC<Props> = ({ title, actions, actionsStyle, body, children, titleIcon, titleIconColor, onClose }) => {
+const ActionModals: React.FC<Props> = ({
+	title,
+	actions,
+	actionsStyle,
+	body,
+	children,
+	titleIcon,
+	titleIconColor,
+	onClose,
+}) => {
 	const handleClose = () => {
 		if (onClose) {
 			onClose();
 			return;
 		}
 		// Fallback: find the first non-active action (typically the cancel button)
-		const cancelAction = actions.find(a => !a.active);
+		const cancelAction = actions.find((a) => !a.active);
 		if (cancelAction) {
 			cancelAction.onClick();
 		}
@@ -38,7 +47,7 @@ const ActionModals: React.FC<Props> = ({ title, actions, actionsStyle, body, chi
 	return (
 		<Dialog open onClose={handleClose}>
 			<DialogTitle>
-				<Stack direction="row" alignItems="center" spacing={1}>
+				<Stack spacing={1} sx={{ direction: 'row', alignItems: 'center' }}>
 					{titleIcon && (
 						<Avatar
 							variant="rounded"

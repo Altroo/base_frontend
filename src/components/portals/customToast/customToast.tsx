@@ -1,5 +1,6 @@
 import React from 'react';
 import { Stack, Snackbar, ThemeProvider, Slide } from '@mui/material';
+import type { SlideProps } from '@mui/material/Slide';
 import Styles from './customToast.module.sass';
 import MuiAlert, { AlertProps, AlertColor } from '@mui/material/Alert';
 import { customToastTheme } from '@/utils/themes';
@@ -22,6 +23,10 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 	return <MuiAlert elevation={6} ref={ref} variant="outlined" {...props} />;
 });
 
+const TransitionUp = React.forwardRef<unknown, SlideProps>(function TransitionUp(props, ref) {
+	return <Slide {...props} direction="up" ref={ref} />;
+});
+
 const CustomToast: React.FC<Props> = (props) => {
 	const { type } = props;
 
@@ -33,13 +38,12 @@ const CustomToast: React.FC<Props> = (props) => {
 		<ThemeProvider theme={customToastTheme()}>
 			<Stack spacing={2} className={Styles.rootStack}>
 				<Snackbar
-					style={{ width: 'max-content' }}
+					sx={{width: 'max-content'}}
 					open={props.show}
 					autoHideDuration={6000}
 					onClose={handleClose}
 					anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-					slots={{ transition: Slide }}
-					slotProps={{ transition: { direction: 'up' } }}
+					slots={{ transition: TransitionUp }}
 				>
 					<Alert
 						onClose={handleClose}

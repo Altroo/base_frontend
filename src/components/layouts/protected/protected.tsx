@@ -19,7 +19,7 @@ export const Protected = (props: ProtectedProps) => {
 	// Wait for profile to load before evaluating permissions — avoids false "Accès Refusé" on fresh page loads
 	if (!profil.id) {
 		return (
-			<Box display="flex" justifyContent="center" alignItems="center" py={8}>
+			<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', py: 8 }}>
 				<CircularProgress />
 			</Box>
 		);
