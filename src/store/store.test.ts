@@ -27,34 +27,26 @@ jest.mock('@/store/services/account', () => ({
 	usersApi: makeApiMock('usersApi'),
 }));
 
+// --- Mock rootSaga only (use a lightweight generator) ---
 jest.mock('@/store/sagas', () => ({
 	__esModule: true,
 	rootSaga: function* rootSaga() {
-		while (true) {
-			yield;
-		}
+		// no-op for store wiring tests
 	},
 }));
 
-describe('makeStore', () => {
-	let store: SagaStore;
-	let dispatch: AppDispatch;
+// --- Import fresh store per test so mocks apply ---
+let store: SagaStore;
 
-	beforeEach(() => {
-		// eslint-disable-next-line @typescript-eslint/no-require-imports
-		const { makeStore } = require('./store') as { makeStore: () => SagaStore };
-		store = makeStore();
-		dispatch = store.dispatch as AppDispatch;
-	});
+beforeEach(() => {
+	jest.resetModules();
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
+	store = require('./store').store as SagaStore;
+});
 
-	afterEach(() => {
-		if (store?.sagaTask) {
-			store.sagaTask.cancel();
-		}
-	});
-
-	it('creates a store with the expected initial state shape', () => {
-		const state = store.getState() as RootState;
+describe('Redux Saga Store', () => {
+	it('creates store with expected reducers', () => {
+		const state: RootState = store.getState();
 		expect(state).toHaveProperty('_init');
 		expect(state).toHaveProperty('account');
 		expect(state).toHaveProperty('accountApi');
@@ -62,11 +54,27 @@ describe('makeStore', () => {
 		expect(state).toHaveProperty('usersApi');
 	});
 
-	it('store has a sagaTask set after makeStore', () => {
+	it('attaches sagaTask after running rootSaga', () => {
 		expect(store.sagaTask).toBeDefined();
+		expect(typeof store.sagaTask?.isRunning).toBe('function');
 	});
 
-	it('dispatch is available', () => {
-		expect(typeof dispatch).toBe('function');
+	it('dispatch works with thunk actions', async () => {
+		const thunkAction = (): ((dispatch: AppDispatch) => Promise<void>) => {
+			return async (dispatch) => {
+				dispatch({ type: 'TEST_ACTION' });
+			};
+		};
+
+		const dispatch: AppDispatch = store.dispatch;
+		await dispatch(thunkAction());
+		const result = dispatch({ type: 'CHECK' });
+		expect(result).toEqual({ type: 'CHECK' });
+	});
+
+	it('dispatches plain actions correctly', () => {
+		const action = { type: 'PLAIN_ACTION' };
+		const result = store.dispatch(action);
+		expect(result).toEqual(action);
 	});
 });

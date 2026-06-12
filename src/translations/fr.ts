@@ -154,7 +154,7 @@ export const fr: TranslationDictionary = {
 		enterEmailDescription: 'Entrez votre email pour recevoir un code et modifier votre mot de passe.',
 		enterCode: 'Rentrez le code',
 		codeSentTo: 'Un code a été envoyé à',
-		codeSent: 'code envoyé.',
+		codeSent: 'Code envoyé.',
 		codeSendFailed: "Échec de l'envoi du code.",
 	},
 	validation: {
