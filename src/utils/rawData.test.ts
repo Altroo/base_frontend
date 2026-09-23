@@ -1,9 +1,16 @@
-import { genderItemsList } from './rawData';
+import { AUTH_BACKGROUND_IMAGES, fields, genderItemsList, ITEM_HEIGHT, ITEM_PADDING_TOP, MenuProps } from './rawData';
 import { translations } from '@/translations';
 
 const t = translations.fr;
 
 describe('items lists', () => {
+	it('keeps auth illustration and form settings available', () => {
+		expect(AUTH_BACKGROUND_IMAGES).toHaveLength(4);
+		expect(AUTH_BACKGROUND_IMAGES.map(({ color }) => color)).toEqual(['#E8F5E9', '#FFF3E0', '#E3F2FD', '#F3E5F5']);
+		expect(fields).toEqual(['one', 'two', 'three', 'four', 'five', 'six']);
+		expect(MenuProps.slotProps.paper.style.maxHeight).toBe(ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP);
+	});
+
 	describe('genderItemsList', () => {
 		it('has two entries with correct codes and values', () => {
 			const items = genderItemsList(t);

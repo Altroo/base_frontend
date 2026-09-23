@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState, useMemo } from 'react';
+import { useRef, useState, type ReactNode, type SyntheticEvent } from 'react';
 import { styled, ThemeProvider } from '@mui/material/styles';
 import MuiAppBar, { type AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import {
@@ -134,7 +134,7 @@ const AppBar = styled(MuiAppBar, {
 
 type Props = {
 	title: string;
-	children: React.ReactNode;
+	children: ReactNode;
 };
 
 const NavigationBar = (props: Props) => {
@@ -144,7 +144,7 @@ const NavigationBar = (props: Props) => {
 	const { data: session, status } = useSession();
 	const { avatar_cropped, first_name, last_name, gender, is_staff } = useAppSelector(getProfilState);
 	const { t, language, setLanguage } = useLanguage();
-	const navigationMenu = useMemo(() => getNavigationMenu(is_staff, t), [is_staff, t]);
+	const navigationMenu = getNavigationMenu(is_staff, t);
 	const moreVertRef = useRef<HTMLButtonElement>(null);
 	const [mobileMenuAnchor, setMobileMenuAnchor] = useState<HTMLElement | null>(null);
 
@@ -169,7 +169,7 @@ const NavigationBar = (props: Props) => {
 
 	const [userExpanded, setUserExpanded] = useState<string | false>(false);
 
-	const defaultExpanded: string | false = useMemo(() => {
+	const defaultExpanded: string | false = (() => {
 		const exactMatch = Object.entries(navigationMenu).find(([, section]) =>
 			section.items.some((item) => {
 				const normalizedPath = item.path.replace(/^https?:\/\/[^/]+/, '');
@@ -207,7 +207,7 @@ const NavigationBar = (props: Props) => {
 		});
 
 		return bestMatch ? `panel-${bestMatch}` : false;
-	}, [pathname, navigationMenu]);
+	})();
 
 	const expanded = userExpanded !== false ? userExpanded : defaultExpanded;
 
@@ -219,7 +219,7 @@ const NavigationBar = (props: Props) => {
 		}
 	};
 
-	const handleChange = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
+	const handleChange = (panel: string) => (_event: SyntheticEvent, isExpanded: boolean) => {
 		setUserExpanded(isExpanded ? panel : false);
 	};
 

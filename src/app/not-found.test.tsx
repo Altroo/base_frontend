@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
@@ -26,7 +25,6 @@ jest.mock('@/utils/hooks', () => ({
 		t: jest.requireActual('@/translations').translations.fr,
 	}),
 }));
-
 import NotFound from './not-found';
 
 describe('NotFound (404 page)', () => {

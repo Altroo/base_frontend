@@ -1,4 +1,4 @@
-import React from 'react';
+import { type Dispatch, type FC, type ReactNode, type SetStateAction, type SyntheticEvent, type Ref } from 'react';
 import { Stack, Snackbar, ThemeProvider, Slide } from '@mui/material';
 import type { SlideProps } from '@mui/material/Slide';
 import Styles from './customToast.module.sass';
@@ -14,23 +14,23 @@ import {
 type Props = {
 	type: AlertColor;
 	show: boolean;
-	setShow: React.Dispatch<React.SetStateAction<boolean>>;
+	setShow: Dispatch<SetStateAction<boolean>>;
 	message: string;
-	children?: React.ReactNode;
+	children?: ReactNode;
 };
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
+const Alert = ({ ref, ...props }: AlertProps & { ref?: Ref<HTMLDivElement> }) => {
 	return <MuiAlert elevation={6} ref={ref} variant="outlined" {...props} />;
-});
+};
 
-const TransitionUp = React.forwardRef<unknown, SlideProps>(function TransitionUp(props, ref) {
+const TransitionUp = ({ ref, ...props }: SlideProps & { ref?: Ref<unknown> }) => {
 	return <Slide {...props} direction="up" ref={ref} />;
-});
+};
 
-const CustomToast: React.FC<Props> = (props) => {
+const CustomToast: FC<Props> = (props) => {
 	const { type } = props;
 
-	const handleClose = (_event?: React.SyntheticEvent | Event, reason?: string) => {
+	const handleClose = (_event?: SyntheticEvent | Event, reason?: string) => {
 		if (reason === 'clickaway') return;
 		props.setShow(false);
 	};
@@ -38,7 +38,7 @@ const CustomToast: React.FC<Props> = (props) => {
 		<ThemeProvider theme={customToastTheme()}>
 			<Stack spacing={2} className={Styles.rootStack}>
 				<Snackbar
-					sx={{width: 'max-content'}}
+					sx={{ width: 'max-content' }}
 					open={props.show}
 					autoHideDuration={6000}
 					onClose={handleClose}

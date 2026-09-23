@@ -4,7 +4,7 @@ import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { createDateRangeFilterOperator } from './dateRangeFilterOperator';
-import React from 'react';
+import { type RefObject } from 'react';
 
 jest.mock('@/utils/hooks', () => ({
 	useLanguage: () => ({
@@ -16,7 +16,7 @@ jest.mock('@/utils/hooks', () => ({
 
 describe('dateRangeFilterOperator', () => {
 	let mockColumn: GridColDef;
-	const mockApiRef = { current: null } as unknown as React.RefObject<GridApiCommunity>;
+	const mockApiRef = { current: null } as unknown as RefObject<GridApiCommunity>;
 
 	beforeEach(() => {
 		mockColumn = { field: 'date', headerName: 'Date' };

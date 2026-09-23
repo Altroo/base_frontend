@@ -1,4 +1,4 @@
-import React from 'react';
+import { type SVGProps } from 'react';
 import { render, screen, fireEvent, within, cleanup } from '@testing-library/react';
 import CustomToast from './customToast';
 import '@testing-library/jest-dom';
@@ -7,25 +7,25 @@ import '@testing-library/jest-dom';
 jest.mock('@mui/icons-material/CheckCircleOutlined', () => {
 	return {
 		__esModule: true,
-		default: (props: React.SVGProps<SVGSVGElement>) => <svg data-testid="CheckCircleOutlinedIcon" {...props} />,
+		default: (props: SVGProps<SVGSVGElement>) => <svg data-testid="CheckCircleOutlinedIcon" {...props} />,
 	};
 });
 jest.mock('@mui/icons-material/ErrorOutlined', () => {
 	return {
 		__esModule: true,
-		default: (props: React.SVGProps<SVGSVGElement>) => <svg data-testid="ErrorOutlinedIcon" {...props} />,
+		default: (props: SVGProps<SVGSVGElement>) => <svg data-testid="ErrorOutlinedIcon" {...props} />,
 	};
 });
 jest.mock('@mui/icons-material/InfoOutlined', () => {
 	return {
 		__esModule: true,
-		default: (props: React.SVGProps<SVGSVGElement>) => <svg data-testid="InfoOutlinedIcon" {...props} />,
+		default: (props: SVGProps<SVGSVGElement>) => <svg data-testid="InfoOutlinedIcon" {...props} />,
 	};
 });
 jest.mock('@mui/icons-material/WarningAmberOutlined', () => {
 	return {
 		__esModule: true,
-		default: (props: React.SVGProps<SVGSVGElement>) => <svg data-testid="WarningAmberOutlinedIcon" {...props} />,
+		default: (props: SVGProps<SVGSVGElement>) => <svg data-testid="WarningAmberOutlinedIcon" {...props} />,
 	};
 });
 

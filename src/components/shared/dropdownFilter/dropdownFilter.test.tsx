@@ -1,4 +1,4 @@
-import React from 'react';
+import { type ReactElement } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import DropdownFilter, { createDropdownFilterOperators, createBooleanFilterOperators } from './dropdownFilter';
@@ -13,7 +13,7 @@ jest.mock('@/utils/hooks', () => ({
 	}),
 }));
 
-const renderWithTheme = (ui: React.ReactElement) => render(<ThemeProvider theme={createTheme()}>{ui}</ThemeProvider>);
+const renderWithTheme = (ui: ReactElement) => render(<ThemeProvider theme={createTheme()}>{ui}</ThemeProvider>);
 
 const options: DropdownFilterOption[] = [
 	{ value: 'opt1', label: 'Option 1', color: 'primary' },

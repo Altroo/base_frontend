@@ -1,4 +1,4 @@
-import React from 'react';
+import { type SVGProps, createElement } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import SquareImageInputFile from './squareImageInputFile';
 import '@testing-library/jest-dom';
@@ -12,7 +12,7 @@ jest.mock('@/utils/hooks', () => ({
 }));
 
 jest.mock('@mui/icons-material/Add', () => {
-	type AddIconProps = React.SVGProps<SVGSVGElement> & {
+	type AddIconProps = SVGProps<SVGSVGElement> & {
 		color?: 'inherit' | 'primary' | 'secondary' | 'action' | 'error' | 'disabled';
 		sx?: Record<string, unknown> | undefined;
 	};
@@ -21,9 +21,9 @@ jest.mock('@mui/icons-material/Add', () => {
 		__esModule: true,
 		default: (props: AddIconProps) => {
 			const { className } = props;
-			const svgProps: React.SVGProps<SVGSVGElement> = {};
+			const svgProps: SVGProps<SVGSVGElement> = {};
 			if (className) svgProps.className = className;
-			return React.createElement('svg', svgProps);
+			return createElement('svg', svgProps);
 		},
 	};
 });
